@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edtPassword"
-            android:hint="Name"
+            android:hint="Password"
             android:textColorHint="@android:color/white"
             android:text="1234567"
             android:textColor="@android:color/white"

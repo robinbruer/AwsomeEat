@@ -1,5 +1,6 @@
 package com.teamawsome.awsomeeat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +41,7 @@ public class Home extends AppCompatActivity
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
     MenuViewHolder viewHolder;
+    FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
 
 
 
@@ -95,7 +97,7 @@ public class Home extends AppCompatActivity
 
     private void loadMenu() {
         //FirebaseRecyclerAdapter<Category,MenuViewHolder>
-       FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Category,MenuViewHolder> (Category.class,layout.menu_item,MenuViewHolder.class,category){
+       adapter = new  FirebaseRecyclerAdapter<Category,MenuViewHolder>(Category.class,layout.menu_item,MenuViewHolder.class,category){
 
 
 
@@ -115,7 +117,12 @@ public class Home extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this,""+clickItem.getName(),Toast.LENGTH_SHORT).show();
+                        //Get CategoryId
+                        Intent foodlist = new Intent(Home.this,FoodList.class);
+                        //CategoryId is key
+                        foodlist.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        startActivity(foodlist);
+
 
                     }
                 });
